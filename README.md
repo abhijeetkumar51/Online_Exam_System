@@ -1,192 +1,105 @@
-# 🚀 Online Exam System – Java (Spring Boot)
+# 🚀 Online Exam System – Spring Boot
 
-<p align="center">
+<p align="left">
 <img src="https://img.shields.io/badge/Java-17-blue?style=for-the-badge&logo=java&logoColor=white" alt="Java 17">
-<img src="https://img.shields.io/badge/Spring%20Boot-3.x-brightgreen?style=for-the-badge&logo=springboot&logoColor=white" alt="Spring Boot 3.x">
-<img src="https://img.shields.io/badge/JPA%20%2F%20Hibernate-red?style=for-the-badge" alt="JPA / Hibernate">
+<img src="https://img.shields.io/badge/Spring%20Boot-3.2-brightgreen?style=for-the-badge&logo=springboot&logoColor=white" alt="Spring Boot 3.2">
+<img src="https://img.shields.io/badge/Thymeleaf-green?style=for-the-badge&logo=thymeleaf&logoColor=white" alt="Thymeleaf">
+<img src="https://img.shields.io/badge/Bootstrap%205-purple?style=for-the-badge&logo=bootstrap&logoColor=white" alt="Bootstrap 5">
 <img src="https://img.shields.io/badge/H2%20Database-lightgrey?style=for-the-badge" alt="H2 Database">
 </p>
 
-A comprehensive **Online Examination System** built using **Spring Boot, Spring Security, Thymeleaf, Bootstrap 5**, and **JPA/Hibernate**.  
-The platform provides a secure and user-friendly environment for **Admins** and **Students** to manage and take online tests effectively.
+A comprehensive, responsive, and modern **Online Examination System** built with **Spring Boot, Spring Security, Thymeleaf**, and **Bootstrap 5**.
 
-✔️ Completely Free  
-✔️ Full Source Code Included
+This platform provides a secure, intuitive, and beautifully designed SaaS-style environment for **Admins** to manage exams and **Students** to take tests and track their performance.
 
 ---
 
-# 💖 Support & Contact
+## ✨ Key Features & UI Updates
 
-This project is created by **LazyCoder**.
+This project features a fully modernized **Glassmorphism Dark-Mode UI** across all key pages:
 
-### 📺 Subscribe to My YouTube Channel
-I post tutorials, Java/Python projects, and Spring Boot content regularly.
+### 🌟 Global UI/UX
+- **SaaS-Style Landing Page:** Animated hero section, feature cards, scrolling statistics, and a sleek dark gradient design.
+- **Modern Authentication:** Glassmorphic Login & Register cards with ambient glow, icon inputs, and fade-in animations.
+- **Redesigned Dashboards:** Advanced Chart.js analytics for both students and admins, wrapped in a frosted-glass aesthetic.
+- **Responsive Navigation:** Sticky, blurred navbar with customized user profile dropdowns.
 
-👉 **Subscribe Here:**  
-https://www.youtube.com/c/LazyCoderOnline?sub_confirmation=1
+### 👨‍💻 Admin Features
+- **Secure Dashboard:** Overview of total students, exams, questions, and submission analytics.
+- **Exam Management (CRUD):** Create, edit, and delete exams (title, duration, description).
+- **Question Bank:** Add and manage multiple-choice questions for each exam.
+- **Admin Management:** Super-admins can add/remove secondary admins to help manage the platform.
+- **Student Management:** View registered students, reset passwords, or delete accounts securely (with cascaded results deletion).
+- **Results Oversight:** View all student submissions and performance metrics.
 
----
-
-### 🤝 Need Help or Want a Custom Project?
-
-📌 Facing issues with this project?  
-📌 Want a custom Java/Spring Boot/Django project?
-
-**I am available for freelance development.**
-
-📱 **WhatsApp:** https://wa.me/919572181024
-
-<p align="center">
-<a href="https://www.youtube.com/c/LazyCoderOnline?sub_confirmation=1">
-<img src="https://img.shields.io/badge/Subscribe-LazyCoder-red?style=for-the-badge&logo=youtube" >
-</a>
-
-<a href="https://wa.me/919572181024">
-<img src="https://img.shields.io/badge/WhatsApp-Chat%20Now-green?style=for-the-badge&logo=whatsapp" >
-</a>
-</p>
+### 🧑‍🎓 Student Features
+- **Secure Registration & Login:** Email/Password based authentication with profile picture uploads.
+- **Personalized Dashboard:** Visualize past performance, average scores, and available exams.
+- **Live Exam Interface:** Interactive UI with a live countdown timer and paginated questions.
+- **Instant Grading:** Exam results are calculated immediately upon submission.
+- **Detailed Reviews:** Students can review their past exams to see correct answers vs. their selected options.
+- **Profile Management:** Update personal details, mobile number, and profile picture securely.
 
 ---
 
-# 📸 Screenshots
+## 🛠️ Tech Stack
 
-
-<table width="100%">
-
-
-<tr>
-<td align="center"><b>Exam Page (with Pagination)</b></td>
-</tr>
-<tr>
-<td align="center"><img src="https://github.com/sumitkumar1503/online-exam-system/blob/master/screenshots/exampage.png" width="90%"></td>
-</tr>
-
-<tr>
-<td align="center"><b>Admin Dashboard</b></td>
-</tr>
-<tr>
-<td align="center"><img src="https://github.com/sumitkumar1503/online-exam-system/blob/master/screenshots/admindashboard.png?raw=true" width="90%"></td>
-</tr>
-
-<tr>
-<td align="center"><b>Manage Exam</b></td>
-</tr>
-<tr>
-<td align="center"><img src="https://github.com/sumitkumar1503/online-exam-system/blob/master/screenshots/adminmanageexam.png" width="90%"></td>
-</tr>
-
-<tr>
-<td align="center"><b>Manage Question</b></td>
-</tr>
-<tr>
-<td align="center"><img src="https://github.com/sumitkumar1503/online-exam-system/blob/master/screenshots/adminmanagequestion.png" width="90%"></td>
-</tr>
-</table>
+| Component | Technology |
+|---|---|
+| **Backend Framework** | Spring Boot 3.2 (Java 17) |
+| **Security** | Spring Security 6 |
+| **Frontend Templates** | Thymeleaf |
+| **Styling & UI** | Vanilla CSS, Bootstrap 5.3, Bootstrap Icons |
+| **Charts & Analytics** | Chart.js |
+| **Database** | H2 (File-based, highly portable) |
+| **ORM** | Hibernate / Spring Data JPA |
+| **File Storage** | Local File System (Images mapped to `/uploads/`) |
 
 ---
 
-# ✨ Features
+## 🚀 Getting Started
 
-## 👨‍💻 Admin Features
-- Secure Admin Login
-- Stats Dashboard (Total Students, Exams, Questions, Submissions)
-- **Exam CRUD** (title, duration, description)
-- **Question CRUD** per exam
-- Cascade deletes for exams → questions → results
-- Protect answered questions from accidental delete
-- Manage Students
-- Reset Student Password
-- Delete Student Account (cascade all related data)
-- View all submissions for any exam
+### Prerequisites
+- **Java 17** or higher installed.
+- **Maven** (optional, repo includes Maven wrapper).
 
----
-
-## 🧑‍🎓 Student Features
-- Student Registration (Full Name, Email, Mobile, Profile Picture)
-- Secure Login
-- Dashboard with KPIs + Performance Chart
-- Take Exam (paginated interface + question palette)
-- Live Timer (auto submit)
-- Instant Results (score, percentage, pass/fail)
-- Detailed Review Page (correct vs incorrect answers)
-- Profile Update
-- Upload New Profile Picture
-- Change Password
-- View All Previous Exam Results
-
----
-
-# 🛠️ Tech Stack
-
-| Layer | Technology                                 |
-|------|--------------------------------------------|
-| Backend | Spring Boot 3, Spring Security 6           |
-| Frontend | Thymeleaf, Html, Bootstrap 5, Chart.js     |
-| Database | H2 (file-based) (configurable to other DB) |
-| ORM | Hibernate / JPA                            |
-| Build | Maven                                      |
-| Storage | Local File System for images               |
-
----
-
-# 🚀 How to Run the Project
-
-### ✔️ Prerequisites
-- Java **17+**
-- Maven
-- Any IDE (IntelliJ, VS Code, Eclipse)
-
----
-
-### ✔️ Clone the Repository
-
+### 1. Clone the Repository
 ```bash
-git clone https://github.com/sumitkumar1503/online-exam-system.git
-cd online-exam-system
+git clone https://github.com/abhijeetkumar51/Online_Exam_System.git
+cd Online_Exam_System
 ```
 
----
+### 2. Run the Application
+You can run the application directly using the included Maven wrapper:
 
-### ✔️ Start the Application
-
-Open the project → Run:
-
-`OnlineExamApplication.java`
-
-Server will start at:
-
-👉 http://localhost:7890
-
----
-
-# 🗄️ Database (H2)
-
-Access H2 Console:
-
-👉 http://localhost:7890/h2-console
-
+**Windows:**
+```powershell
+.\mvnw.cmd spring-boot:run
 ```
-JDBC URL : jdbc:h2:file:./data/examdb  
-Username : sa  
-Password : password
+**Mac/Linux:**
+```bash
+./mvnw spring-boot:run
 ```
 
----
-
-# 🔐 Default Admin User
-
-| Username | Password |
-|---------|----------|
-| admin | adminpass |
+The server will start on: **[http://localhost:8000](http://localhost:8000)**
 
 ---
 
-# 📜 License
+## 🗄️ Database Access
 
-This project is **open-source** under the **MIT License**.
+The application uses an embedded H2 file-based database. To view the database tables:
+1. Navigate to: **[http://localhost:8000/h2-console](http://localhost:8000/h2-console)**
+2. Connect using the JDBC URL: `jdbc:h2:file:./data/examdb`
+*(Default credentials are intentionally blank/configured in `application.properties`)*
 
 ---
 
-<p align="center">
-<strong>Happy Coding ❤️</strong>
-</p>
+## 🛡️ Default Authentication
+
+On the **very first run**, a default Super Admin is generated if no users exist. 
+Check your terminal output for the generated admin credentials, or review your `application.properties` / `DataInitializer.java` configuration.
+
+---
+
+## 📜 License
+This project is open-source and available under the **MIT License**.
