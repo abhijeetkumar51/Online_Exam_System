@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <title>Add Admin / Teacher</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+        body {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="~{fragments :: navbar}"></div>
+
+<div class="container mt-5">
+
+  <!-- Alert Messages -->
+  <div th:if="${errorMessage}" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Error:</strong> <span th:text="${errorMessage}"></span>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+
+  <!-- Header -->
+  <div class="pb-3 mb-4 border-bottom d-flex align-items-center">
+    <i class="bi bi-person-plus-fill me-3" style="font-size: 2.5rem; color: #6f42c1;"></i>
+    <div>
+      <h2 class="mb-0">Add New Admin / Teacher</h2>
+      <p class="text-muted mb-0">Create a new admin or teacher account with full platform access.</p>
+    </div>
+  </div>
+
+  <!-- Add Admin Form -->
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
+          <form th:action="@{/admin/admin/add}" method="post" th:object="${user}">
+
+            <div class="mb-3">
+              <label for="fullName" class="form-label fw-bold">Full Name</label>
+              <input type="text" class="form-control" id="fullName" th:field="*{fullName}"
+                     placeholder="e.g. Prof. Sharma" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="username" class="form-label fw-bold">Email (Username)</label>
+              <input type="email" class="form-control" id="username" th:field="*{username}"
+                     placeholder="e.g. teacher@school.com" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="password" class="form-label fw-bold">Password</label>
+              <input type="password" class="form-control" id="password" th:field="*{password}"
+                     placeholder="Set initial password" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="mobileNumber" class="form-label fw-bold">Mobile Number <small class="text-muted">(optional)</small></label>
+              <input type="text" class="form-control" id="mobileNumber" th:field="*{mobileNumber}"
+                     placeholder="e.g. 9876543210">
+            </div>
+
+            <div class="d-flex justify-content-between mt-4">
+              <a th:href="@{/admin/manage-admins}" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left me-1"></i> Back to Admin List
+              </a>
+              <button type="submit" class="btn btn-primary">
+                <i class="bi bi-person-check-fill me-1"></i> Create Admin Account
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
