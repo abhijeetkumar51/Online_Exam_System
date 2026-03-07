@@ -2,292 +2,369 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-    <title>Admin Dashboard</title>
+    <title>Admin Dashboard — ExamPro</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        body {
-            background-color: #f8f9fa;
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #818cf8;
+            --accent: #06b6d4;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --gray-light: #94a3b8;
+            --gradient-bg: linear-gradient(135deg, #0f172a 0%, #1e1b4b 40%, #312e81 100%);
+            --gradient-primary: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+            --gradient-success: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            --gradient-warning: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            --gradient-info: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            --gradient-purple: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
         }
 
-        /* --- New KPI Card Styles --- */
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--gradient-bg);
+            color: white;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -40%;
+            right: -20%;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.1), transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* KPI Cards */
         .kpi-card {
-            border: 0;
-            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            /* slight border */
+            border-radius: 16px;
             color: white;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 1.5rem;
         }
 
         .kpi-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            wight: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.05));
+            pointer-events: none;
+        }
+
+        .kpi-card.blue {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(37, 99, 235, 0.05));
+        }
+
+        .kpi-card.green {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.05));
+        }
+
+        .kpi-card.purple {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(109, 40, 217, 0.05));
+        }
+
+        .kpi-card.orange {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(217, 119, 6, 0.05));
         }
 
         .kpi-card .kpi-value {
             font-size: 2.5rem;
-            font-weight: 700;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 0.25rem;
         }
 
         .kpi-card .kpi-label {
-            font-size: 1rem;
-            opacity: 0.8;
+            font-size: 0.95rem;
+            color: var(--gray-light);
+            font-weight: 500;
         }
 
         .kpi-card .kpi-icon {
-            font-size: 4rem;
+            font-size: 3.5rem;
             position: absolute;
             right: 15px;
             top: 50%;
             transform: translateY(-50%);
-            opacity: 0.2;
+            opacity: 0.15;
             transition: all 0.3s ease;
         }
 
         .kpi-card:hover .kpi-icon {
-            opacity: 0.3;
+            opacity: 0.25;
             transform: translateY(-50%) scale(1.1);
         }
 
-        /* Card Colors */
-        .bg-gradient-primary {
-            background: linear-gradient(45deg, #0d6efd, #0d6efd);
-        }
-
-        .bg-gradient-success {
-            background: linear-gradient(45deg, #198754, #198754);
-        }
-
-        .bg-gradient-info {
-            background: linear-gradient(45deg, #0dcaf0, #0dcaf0);
-        }
-
-        .bg-gradient-warning {
-            background: linear-gradient(45deg, #ffc107, #ffc107);
-        }
-
-        .styled-card {
-            background-color: #fff;
-            border-radius: 8px;
-            padding: 0;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            border: 1px solid #e9ecef;
-            height: 400px;
-        }
-
-        .styled-card .card-header {
-            padding: 1rem 1.5rem;
-            background-color: #fff;
-            border-bottom: 1px solid #e9ecef;
-            font-weight: 600;
-        }
-
-        /* --- THIS IS UPDATED --- */
-        .chart-container {
-            background-color: #fff;
-            border-radius: 8px;
+        /* Glassmorphism Panel */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
             padding: 1.5rem;
-            height: 400px;
-            position: relative;
-            /* <-- This is required by Chart.js */
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            height: 100%;
         }
 
-        .activity-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            overflow-y: auto;
-            max-height: 335px;
-            /* 400px card height - header height */
-        }
-
-        .activity-item {
+        .glass-panel-header {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
-            padding: 1rem 1.5rem;
-            border-bottom: 1px solid #f8f9fa;
+            gap: 10px;
         }
 
-        .activity-item:last-child {
-            border-bottom: 0;
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
         }
 
-        .activity-icon {
-            font-size: 1.5rem;
-            margin-right: 1rem;
-            padding: 8px;
-            border-radius: 50%;
-        }
-
+        /* Quick Actions */
         .quick-action-btn {
-            display: block;
-            padding: 1rem 1.5rem;
-            border-bottom: 1px solid #f8f9fa;
-            color: #212529;
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.25rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            color: white;
             text-decoration: none;
             font-weight: 500;
-            transition: background-color 0.2s ease;
+            margin-bottom: 0.75rem;
+            transition: all 0.2s;
+        }
+
+        .quick-action-btn:last-child {
+            margin-bottom: 0;
         }
 
         .quick-action-btn:hover {
-            background-color: #f8f9fa;
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
+            color: white;
+            transform: translateX(4px);
         }
 
         .quick-action-btn i {
-            width: 30px;
-            margin-right: 10px;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            margin-right: 12px;
+            font-size: 1.2rem;
+        }
+
+        /* Icon background colors */
+        .icon-blue {
+            background: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+        }
+
+        .icon-green {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+        }
+
+        .icon-purple {
+            background: rgba(139, 92, 246, 0.15);
+            color: #a78bfa;
+        }
+
+        .icon-orange {
+            background: rgba(245, 158, 11, 0.15);
+            color: #fbbf24;
         }
     </style>
 </head>
 
 <body>
+    <!-- Navbar should ideally be dark mode too, assuming it uses bg-dark -->
     <div th:replace="~{fragments :: navbar}"></div>
 
     <div class="container mt-5">
 
         <!-- Welcome Header -->
-        <div class="d-flex align-items-center mb-4">
-
-            <div class="ms-3">
-                <h2 class="mb-0">Welcome, Admin!</h2>
-                <p class="mb-0 text-muted">Here's a summary of your platform's activity.</p>
-            </div>
+        <div class="mb-5">
+            <h2 class="mb-1 fw-bold" style="letter-spacing: -0.5px;">Welcome, Admin!</h2>
+            <p class="text-gray-light" style="color: var(--gray-light);">Here's a summary of your platform's activity.
+            </p>
         </div>
 
-        <!-- 1. KPI Cards (Redecorated) -->
-        <div class="row g-4">
+        <!-- 1. KPI Cards -->
+        <div class="row g-4 mb-4">
             <div class="col-md-3">
-                <div class="kpi-card bg-gradient-primary p-3">
+                <div class="kpi-card blue">
                     <div class="kpi-value" th:text="${totalStudents}">0</div>
-                    <div class_l="kpi-label">Total Students</div>
-                    <i class="bi bi-people-fill kpi-icon"></i>
+                    <div class="kpi-label">Total Students</div>
+                    <i class="bi bi-people-fill kpi-icon text-primary"></i>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="kpi-card bg-gradient-success p-3">
+                <div class="kpi-card green">
                     <div class="kpi-value" th:text="${totalExams}">0</div>
                     <div class="kpi-label">Total Exams</div>
-                    <i class="bi bi-journal-text kpi-icon"></i>
+                    <i class="bi bi-journal-text kpi-icon text-success"></i>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="kpi-card bg-gradient-info p-3">
+                <div class="kpi-card purple">
                     <div class="kpi-value" th:text="${totalQuestions}">0</div>
                     <div class="kpi-label">Total Questions</div>
-                    <i class="bi bi-question-circle-fill kpi-icon"></i>
+                    <i class="bi bi-question-circle-fill kpi-icon text-purple" style="color: #a78bfa;"></i>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="kpi-card bg-gradient-warning p-3">
+                <div class="kpi-card orange">
                     <div class="kpi-value" th:text="${totalSubmissions}">0</div>
                     <div class="kpi-label">Total Submissions</div>
-                    <i class="bi bi-card-checklist kpi-icon"></i>
+                    <i class="bi bi-card-checklist kpi-icon text-warning"></i>
                 </div>
             </div>
         </div>
 
         <!-- 2. Charts and Activity -->
-        <div class="row g-4 mt-3">
+        <div class="row g-4 mt-1">
             <!-- Bar Chart -->
             <div class="col-lg-7">
-                <!--
-              Note: I'm removing the .styled-card wrapper from here
-              as .chart-container already has all the styles.
-            -->
-                <div class="chart-container">
-                    <h5 class="mb-3">Exam Submissions</h5>
-                    <canvas id="submissionsChart"></canvas>
-                </div>
-            </div>
-
-            <!-- Quick Actions & Activity -->
-            <div class="col-lg-5">
-                <div class="styled-card">
-                    <div class="card-header">Quick Actions</div>
-                    <!-- Quick Actions List -->
-                    <div class="list-group list-group-flush">
-                        <a th:href="@{/admin/manage-exams}" class="quick-action-btn">
-                            <i class="bi bi-pencil-square text-primary"></i>Manage Exams
-                        </a>
-                        <a th:href="@{/admin/students}" class="quick-action-btn">
-                            <i class="bi bi-people-fill text-info"></i>Manage Students
-                        </a>
-                        <a th:href="@{/admin/exam/add}" class="quick-action-btn">
-                            <i class="bi bi-plus-circle-fill text-success"></i>Create New Exam
-                        </a>
-                        <a th:href="@{/admin/manage-admins}" class="quick-action-btn">
-                            <i class="bi bi-shield-lock-fill text-purple" style="color: #6f42c1;"></i>Manage
-                            Admins/Teachers
-                        </a>
-
+                <div class="glass-panel">
+                    <div class="glass-panel-header">
+                        <i class="bi bi-bar-chart-fill text-primary"></i> Exam Submissions
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="submissionsChart"></canvas>
                     </div>
                 </div>
             </div>
-            <br>
-            <br>
+
+            <!-- Quick Actions -->
+            <div class="col-lg-5">
+                <div class="glass-panel">
+                    <div class="glass-panel-header">
+                        <i class="bi bi-lightning-fill text-warning"></i> Quick Actions
+                    </div>
+
+                    <a th:href="@{/admin/manage-exams}" class="quick-action-btn">
+                        <i class="bi bi-pencil-square icon-blue"></i> Manage Exams
+                    </a>
+                    <a th:href="@{/admin/students}" class="quick-action-btn">
+                        <i class="bi bi-people-fill icon-purple"></i> Manage Students
+                    </a>
+                    <a th:href="@{/admin/exam/add}" class="quick-action-btn">
+                        <i class="bi bi-plus-circle-fill icon-green"></i> Create New Exam
+                    </a>
+                    <a th:href="@{/admin/manage-admins}" class="quick-action-btn">
+                        <i class="bi bi-shield-lock-fill icon-orange"></i> Manage Admins/Teachers
+                    </a>
+                </div>
+            </div>
         </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <br><br>
+    </div>
 
-        <!-- 3. Chart.js Initialization Script -->
-        <script th:inline="javascript">
-            /*<![CDATA[*/
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-            const chartLabels = /*[[${chartLabels}]]*/[];
-            const chartData = /*[[${chartData}]]*/[];
+    <!-- Chart.js Initialization -->
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        const chartLabels = /*[[${chartLabels}]]*/[];
+        const chartData = /*[[${chartData}]]*/[];
 
-            if (chartLabels.length > 0) {
-                const ctx = document.getElementById('submissionsChart').getContext('2d');
-                const submissionsChart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: chartLabels,
-                        datasets: [{
-                            label: '# of Submissions',
-                            data: chartData,
-                            backgroundColor: 'rgba(13, 110, 253, 0.2)',
-                            borderColor: 'rgba(13, 110, 253, 1)',
+        if (chartLabels.length > 0) {
+            const ctx = document.getElementById('submissionsChart').getContext('2d');
+
+            Chart.defaults.color = '#94a3b8'; // gray-light
+            Chart.defaults.font.family = "'Inter', sans-serif";
+
+            const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+            gradient.addColorStop(0, 'rgba(79, 70, 229, 0.8)'); // Primary
+            gradient.addColorStop(1, 'rgba(6, 182, 212, 0.2)'); // Accent
+
+            const submissionsChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: chartLabels,
+                    datasets: [{
+                        label: 'Submissions',
+                        data: chartData,
+                        backgroundColor: gradient,
+                        borderWidth: 0,
+                        borderRadius: 6,
+                        barPercentage: 0.6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                            titleColor: '#fff',
+                            bodyColor: '#e2e8f0',
+                            borderColor: 'rgba(255,255,255,0.1)',
                             borderWidth: 1,
-                            borderRadius: 4
-                        }]
+                            padding: 10,
+                            displayColors: false,
+                            cornerRadius: 8
+                        }
                     },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: { display: false },
-                            tooltip: {
-                                backgroundColor: '#fff',
-                                titleColor: '#333',
-                                bodyColor: '#333',
-                                borderColor: '#ddd',
-                                borderWidth: 1,
-                                displayColors: false,
-                            }
-                        },
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                ticks: {
-                                    stepSize: 1
-                                }
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(255,255,255,0.05)',
+                                drawBorder: false
                             },
-                            x: {
-                                grid: {
-                                    display: false
-                                }
-                            }
+                            ticks: { stepSize: 1, padding: 10 }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { padding: 10 }
                         }
                     }
-                });
-            }
-
-            /*]]>*/
-        </script>
-
+                }
+            });
+        }
+        /*]]>*/
+    </script>
 </body>
 
 </html>
