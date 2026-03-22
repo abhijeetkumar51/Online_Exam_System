@@ -37,3 +37,7 @@ data/
 
 # User-uploaded files (profile pictures etc.)
 uploads/
+
+# Log files
+*.log
+*.txt

@@ -295,7 +295,6 @@ Displays aggregated statistics:
 - Loads all `ExamResult` records for the exam
 - Calculates percentage for each result: `(scoreAchieved * 100) / totalMarks`
 - Displays student name, score, percentage, and submission time
-
 ---
 
 ## 7. Features & Logic — Student Side
