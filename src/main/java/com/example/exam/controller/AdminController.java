@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import java.security.Principal;
 
 import java.util.List;
 import java.util.Optional;
@@ -294,14 +295,24 @@ public class AdminController {
     }
 
     @GetMapping("/admin/add")
-    public String showAddAdminForm(Model model) {
+    public String showAddAdminForm(Model model, Principal principal, RedirectAttributes redirectAttributes) {
+        if (principal == null || (!"admin".equals(principal.getName()) && !"admin@exam.com".equals(principal.getName()))) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Only the main Administrator can add new admins/teachers.");
+            return "redirect:/admin/manage-admins";
+        }
         model.addAttribute("user", new User());
         return "admin/add_admin";
     }
 
     @PostMapping("/admin/add")
     public String addAdmin(@ModelAttribute("user") User user,
+            Principal principal,
             RedirectAttributes redirectAttributes) {
+        if (principal == null || (!"admin".equals(principal.getName()) && !"admin@exam.com".equals(principal.getName()))) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Only the main Administrator can add new admins/teachers.");
+            return "redirect:/admin/manage-admins";
+        }
+
         // Check if username already exists
         if (userService.findByUsername(user.getUsername()) != null) {
             redirectAttributes.addFlashAttribute("errorMessage",
@@ -326,8 +337,8 @@ public class AdminController {
 
             User adminToDelete = adminOpt.get();
 
-            // Prevent deleting the main Administrator account
-            if ("admin@exam.com".equals(adminToDelete.getUsername())) {
+            // Prevent deleting the main Administrator account (both 'admin' and 'admin@exam.com')
+            if ("admin@exam.com".equals(adminToDelete.getUsername()) || "admin".equals(adminToDelete.getUsername())) {
                 redirectAttributes.addFlashAttribute("errorMessage",
                         "The main Administrator account cannot be deleted.");
                 return "redirect:/admin/manage-admins";
