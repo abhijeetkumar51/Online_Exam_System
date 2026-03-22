@@ -10,12 +10,13 @@
             background-color: #f8f9fa; /* Light gray background */
         }
     </style>
+  <link rel="stylesheet" th:href="@{/css/admin-theme.css}">
 </head>
 <body>
 
 <div th:replace="~{fragments :: navbar}"></div>
 
-<div class="container mt-5">
+<div class="container mt-5 animate-fade-in">
 
     <!-- Page Header -->
     <div class="pb-3 mb-4 border-bottom d-flex align-items-center">
@@ -27,7 +28,7 @@
     </div>
 
     <!-- Main Card for Table -->
-    <div class="card shadow-sm border-0">
+    <div class="card shadow-sm border-0 animate-slide-up delay-1">
         <div class="card-body">
 
             <!-- Message if no results are found -->
