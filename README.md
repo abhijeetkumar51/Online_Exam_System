@@ -1,44 +1,52 @@
-# 🚀 Online Exam System – Spring Boot
+<div align="center">
+  
+# 🚀 ExamPro: Smart Online Examination System
+  
+*A modern, responsive, and secure examination platform built with Spring Boot and a premium glassmorphic UI.*
 
-<p align="left">
-<img src="https://img.shields.io/badge/Java-17-blue?style=for-the-badge&logo=java&logoColor=white" alt="Java 17">
-<img src="https://img.shields.io/badge/Spring%20Boot-3.2-brightgreen?style=for-the-badge&logo=springboot&logoColor=white" alt="Spring Boot 3.2">
-<img src="https://img.shields.io/badge/Thymeleaf-green?style=for-the-badge&logo=thymeleaf&logoColor=white" alt="Thymeleaf">
-<img src="https://img.shields.io/badge/Bootstrap%205-purple?style=for-the-badge&logo=bootstrap&logoColor=white" alt="Bootstrap 5">
-<img src="https://img.shields.io/badge/H2%20Database-lightgrey?style=for-the-badge" alt="H2 Database">
+<p align="center">
+  <img src="https://img.shields.io/badge/Java-17-blue?style=for-the-badge&logo=java&logoColor=white" alt="Java 17">
+  <img src="https://img.shields.io/badge/Spring%20Boot-3.2-brightgreen?style=for-the-badge&logo=springboot&logoColor=white" alt="Spring Boot 3.2">
+  <img src="https://img.shields.io/badge/Thymeleaf-green?style=for-the-badge&logo=thymeleaf&logoColor=white" alt="Thymeleaf">
+  <img src="https://img.shields.io/badge/Bootstrap%205-purple?style=for-the-badge&logo=bootstrap&logoColor=white" alt="Bootstrap 5">
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker">
 </p>
 
-A comprehensive, responsive, and modern **Online Examination System** built with **Spring Boot, Spring Security, Thymeleaf**, and **Bootstrap 5**.
+[Features](#-key-features) • [Tech Stack](#-tech-stack) • [Installation](#-getting-started) • [Deployment](#-deployment) • [Database](#-database-access)
 
-This platform provides a secure, intuitive, and beautifully designed SaaS-style environment for **Admins** to manage exams and **Students** to take tests and track their performance.
+</div>
+
+---
+
+## 🎯 Overview
+**ExamPro** provides a secure, intuitive, and beautifully designed SaaS-style environment. It empowers **Educators and Admins** to create and manage examinations, while giving **Students** a seamless test-taking experience with instant performance analytics. 
 
 ---
 
 ## ✨ Key Features & UI Updates
 
-This project features a fully modernized **Glassmorphism Dark-Mode UI** across all key pages:
+Our platform features a fully modernized **Glassmorphism Dark-Mode UI** ensuring a premium user experience across all devices.
 
 ### 🌟 Global UI/UX
 - **SaaS-Style Landing Page:** Animated hero section, feature cards, scrolling statistics, and a sleek dark gradient design.
 - **Modern Authentication:** Glassmorphic Login & Register cards with ambient glow, icon inputs, and fade-in animations.
-- **Redesigned Dashboards:** Advanced Chart.js analytics for both students and admins, wrapped in a frosted-glass aesthetic.
+- **Advanced Dashboards:** Interactive Chart.js analytics for students and admins, wrapped in a frosted-glass aesthetic.
 - **Responsive Navigation:** Sticky, blurred navbar with customized user profile dropdowns.
 
-### 👨‍💻 Admin Features
-- **Secure Dashboard:** Overview of total students, exams, questions, and submission analytics.
-- **Exam Management (CRUD):** Create, edit, and delete exams (title, duration, description).
-- **Question Bank:** Add and manage multiple-choice questions for each exam.
-- **Admin Management:** Super-admins can add/remove secondary admins to help manage the platform.
-- **Student Management:** View registered students, reset passwords, or delete accounts securely (with cascaded results deletion).
-- **Results Oversight:** View all student submissions and performance metrics.
+### 👨‍💻 Admin Capabilities
+- **Command Center:** Centralized dashboard tracking total students, exams, questions, and submission analytics.
+- **Exam Management (CRUD):** Create, edit, and delete comprehensive exams with custom duration and descriptions.
+- **Question Bank:** Easily add and manage multiple-choice questions for each assessment.
+- **Role Management:** Super-admins can add/remove secondary admins to distribute platform management.
+- **Student Oversight:** View registered students, reset passwords, or suspend accounts (safely cascades results deletion).
+- **Results Tracking:** Access all student submissions, scores, and historical performance metrics.
 
-### 🧑‍🎓 Student Features
-- **Secure Registration & Login:** Email/Password based authentication with profile picture uploads.
-- **Personalized Dashboard:** Visualize past performance, average scores, and available exams.
-- **Live Exam Interface:** Interactive UI with a live countdown timer and paginated questions.
-- **Instant Grading:** Exam results are calculated immediately upon submission.
-- **Detailed Reviews:** Students can review their past exams to see correct answers vs. their selected options.
-- **Profile Management:** Update personal details, mobile number, and profile picture securely.
+### 🧑‍🎓 Student Experience
+- **Secure Onboarding:** Email/Password based authentication with profile picture uploads.
+- **Personalized Hub:** Visualize past performance, calculate average scores, and discover newly available exams.
+- **Live Exam Interface:** Distraction-free interactive UI with a live countdown timer and paginated questions. Auto-submits when time expires.
+- **Instant Grading:** Exam results are calculated and delivered immediately upon submission.
+- **Detailed Reviews:** Students can review completed exams to compare correct answers against their selected options.
 
 ---
 
@@ -48,20 +56,21 @@ This project features a fully modernized **Glassmorphism Dark-Mode UI** across a
 |---|---|
 | **Backend Framework** | Spring Boot 3.2 (Java 17) |
 | **Security** | Spring Security 6 |
-| **Frontend Templates** | Thymeleaf |
+| **Frontend Templates** | Thymeleaf, HTML5 |
 | **Styling & UI** | Vanilla CSS, Bootstrap 5.3, Bootstrap Icons |
-| **Charts & Analytics** | Chart.js |
-| **Database** | H2 (File-based, highly portable) |
+| **Data Visualization** | Chart.js |
+| **Database** | H2 Database (File-based, highly portable) |
 | **ORM** | Hibernate / Spring Data JPA |
-| **File Storage** | Local File System (Images mapped to `/uploads/`) |
+| **Containerization** | Docker |
 
 ---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- **Java 17** or higher installed.
-- **Maven** (optional, repo includes Maven wrapper).
+- **Java 17** or higher 
+- **Maven** (optional, repo includes Maven wrapper)
+- **Docker** (optional, for containerized run)
 
 ### 1. Clone the Repository
 ```bash
@@ -69,8 +78,8 @@ git clone https://github.com/abhijeetkumar51/Online_Exam_System.git
 cd Online_Exam_System
 ```
 
-### 2. Run the Application
-You can run the application directly using the included Maven wrapper:
+### 2. Run Locally (Spring Boot)
+You can run the application directly using the included Maven wrapper.
 
 **Windows:**
 ```powershell
@@ -80,24 +89,46 @@ You can run the application directly using the included Maven wrapper:
 ```bash
 ./mvnw spring-boot:run
 ```
+The server will start on: **[http://localhost:8080](http://localhost:8080)**
 
-The server will start on: **[http://localhost:8000](http://localhost:8000)**
+---
+
+## 🐳 Docker Support
+
+You can easily run the application using Docker, bypassing the need for a local Java installation.
+
+1. **Build the image**:
+   ```bash
+   docker build -t online-exam-system .
+   ```
+2. **Run the container**:
+   ```bash
+   docker run -p 8080:8080 --name exampro online-exam-system
+   ```
+
+---
+
+## ☁️ Deployment (Cloud)
+
+This project is fully prepared for modern cloud deployments (e.g., Render, Railway, Heroku).
+- It natively reads the `$PORT` environment variable via `server.port=${PORT:8080}`.
+- Simply connect your GitHub repository to a service like **Render** as a Web Service, choose the Docker runtime environment, and deploy in one click!
 
 ---
 
 ## 🗄️ Database Access
 
-The application uses an embedded H2 file-based database. To view the database tables:
-1. Navigate to: **[http://localhost:8000/h2-console](http://localhost:8000/h2-console)**
+The application uses an embedded H2 file-based database for ultimate portability.
+1. Navigate to: **[http://localhost:8080/h2-console](http://localhost:8080/h2-console)**
 2. Connect using the JDBC URL: `jdbc:h2:file:./data/examdb`
-*(Default credentials are intentionally blank/configured in `application.properties`)*
+*(Default credentials are configured in `application.properties`)*
 
 ---
 
 ## 🛡️ Default Authentication
 
 On the **very first run**, a default Super Admin is generated if no users exist. 
-Check your terminal output for the generated admin credentials, or review your `application.properties` / `DataInitializer.java` configuration.
+Check your terminal output for the generated admin credentials, or review your `DataInitializer.java` configuration to authenticate immediately.
 
 ---
 
