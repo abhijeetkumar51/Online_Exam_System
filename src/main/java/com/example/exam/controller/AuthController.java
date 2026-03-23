@@ -50,6 +50,16 @@ public class AuthController {
         return "index";
     }
 
+    @GetMapping("/privacy")
+    public String privacyPolicy() {
+        return "privacy";
+    }
+
+    @GetMapping("/terms")
+    public String termsOfService() {
+        return "terms";
+    }
+
 
     @GetMapping("/login")
     public String loginForm() {
